@@ -10,5 +10,12 @@ source ~/.local/share/omarchy/default/bash/rc
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 
+# ---------------------Custom-------------------
 # Dotfiles management
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# --------------------End Custom-----------------
+# Created by `pipx` on 2025-12-08 06:09:59
+export PATH="$PATH:/home/paidthali/.local/bin"
+
+. "$HOME/.local/share/../bin/env"
