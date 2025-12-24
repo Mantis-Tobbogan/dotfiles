@@ -3,10 +3,17 @@
   "layer": "top",
   "position": "top",
   "spacing": 0,
-  "height": 26,
+  "height": 25,
+
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+
+  // "modules-left": ["custom/omarchy", "hyprland/workspaces", "hyprland/window"],
   "modules-left": ["custom/omarchy", "hyprland/workspaces"],
   "modules-center": [
     "clock",
+    "custom/weather",
     "custom/update",
     "custom/screenrecording-indicator",
   ],
@@ -17,6 +24,7 @@
     "pulseaudio",
     "backlight",
     "cpu",
+    "memory",
     "battery",
   ],
   "hyprland/workspaces": {
@@ -34,7 +42,7 @@
       "8": "8",
       "9": "9",
       "10": "0",
-      "active": "󱓻",
+      "active": " ",
     },
     "persistent-workspaces": {
       "eDP-1": [6, 7, 8, 9, 10],
@@ -46,19 +54,19 @@
       // "5": []
     },
   },
-  "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon}",
-    "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"],
-    "on-scroll-up": "brightnessctl set +5%",
-    "on-scroll-down": "brightnessctl set 5%-",
-    "tooltip-format": "Brightness: {percent}%",
+
+  "custom/power": {
+    "format": "",
+    "on-click": "omarchy-menu system",
+    "tooltip-format": "Power Menu",
   },
+
   "custom/omarchy": {
     "format": "<span font='omarchy'>\ue900</span>",
+    // "format": "ARCH",
     "on-click": "omarchy-menu",
-    "on-click-right": "xdg-terminal-exec",
     "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space",
+    "on-click-right": "omarchy-menu system",
   },
   "custom/update": {
     "format": "",
@@ -66,27 +74,27 @@
     "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
     "tooltip-format": "Omarchy update available",
     "signal": 7,
-    "interval": 21600,
+    "interval": 3600,
   },
 
   "cpu": {
     "interval": 5,
-    "format": "󰍛",
-    "on-click": "omarchy-launch-or-focus-tui btop",
+    "format": "󰍛 {usage}%",
+    "on-click": "$TERMINAL -e btop",
   },
   "clock": {
-    "format": "{:L%d %A %H:%M}",
-    "format-alt": "{:L%d %B W%V %Y}",
-    "tooltip": false,
+    "tooltip-format": "{calendar}",
+    "format-alt": "  {:%a, %d %b %Y}",
+    "format": "{:%I:%M %p}",
     "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select",
   },
   "network": {
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", ""],
     "format": "{icon}",
-    "format-wifi": "{icon}",
+    "format-wifi": "{icon} ⇣⇡",
     "format-ethernet": "󰀂",
     "format-disconnected": "󰤮",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
@@ -94,7 +102,7 @@
     "on-click": "omarchy-launch-wifi",
   },
   "battery": {
-    "format": "{capacity}% {icon}",
+    "format": "{icon} {capacity}% ",
     "format-discharging": "{icon}",
     "format-charging": "{icon}",
     "format-plugged": "",
@@ -113,24 +121,32 @@
     },
   },
   "bluetooth": {
-    "format": "",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂱",
+    "format": "  ",
+    "format-disabled": " 󰂲 ",
+    "format-connected": " 󰂱 ",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "omarchy-launch-bluetooth",
   },
   "pulseaudio": {
     "format": "{icon}",
+    "format-muted": " 󰖁 0% ",
+    "format-icons": {
+      "headphone": "  ",
+      "hands-free": "  ",
+      "headset": "  ",
+      "phone": "  ",
+      "portable": "  ",
+      "car": "  ",
+      "default": ["  ", "  ", "  "],
+    },
     "on-click": "omarchy-launch-or-focus-tui wiremix",
     "on-click-right": "pamixer -t",
+    "tooltip": true,
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,
-    "format-muted": "",
-    "format-icons": {
-      "default": ["", "", ""],
-    },
   },
+
   "group/tray-expander": {
     "orientation": "inherit",
     "drawer": {
@@ -140,7 +156,7 @@
     "modules": ["custom/expand-icon", "tray"],
   },
   "custom/expand-icon": {
-    "format": "",
+    "format": " ",
     "tooltip": false,
   },
   "custom/screenrecording-indicator": {
@@ -152,5 +168,47 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12,
+  },
+
+  //EXTRA MODULES!
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}",
+    "tooltip": true,
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "tooltip-format": "Brightness: {percent}%",
+    "format-icons": [" 󰃞 ", " 󰃝 ", " 󰃟 ", " 󰃠 "],
+  },
+
+  "memory": {
+    "format": "  {percentage}%",
+    "interval": 2,
+    "on-click": "$TERMINAL -e btop",
+  },
+
+  "custom/weather": {
+    "format": "{}°",
+    "tooltip": true,
+    "interval": 60,
+    "exec": "wttrbar --nerd --location Hyderabad",
+    "return-type": "json",
+  },
+
+  "mpris": {
+    "format": "{player_icon} {artist} - {title}",
+    "format-paused": "{status_icon} <i>{artist} - {title}</i>",
+    "player-icons": {
+      "default": " ",
+      "mpv": " ",
+    },
+    "status-icons": {
+      "paused": "<span size='larger'></span>",
+    },
+    "max-length": 50,
+  },
+  "hyprland/window": {
+    "format": "󰄛 ~ {initialTitle}",
+    "max-length": 50,
   },
 }
