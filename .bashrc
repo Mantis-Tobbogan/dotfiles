@@ -13,6 +13,10 @@ source ~/.local/share/omarchy/default/bash/rc
 # ---------------------Custom-------------------
 # Dotfiles management
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias so=source
+
+# SSH term color (Required if you're using Kitty with SSH into other machines)
+export TERM=xterm-256color
 
 # --------------------End Custom-----------------
 # Created by `pipx` on 2025-12-08 06:09:59
