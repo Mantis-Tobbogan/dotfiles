@@ -46,12 +46,8 @@
     },
     "persistent-workspaces": {
       "eDP-1": [6, 7, 8, 9, 10],
-      "DP-1": [1, 2, 3, 4, 5],
-      // "1": [],
-      // "2": [],
-      // "3": [],
-      // "4": [],
-      // "5": []
+      // "DP-1": [1, 2, 3, 4, 5],
+      "HDMI-A-1": [1, 2, 3, 4, 5],
     },
   },
 
@@ -85,7 +81,7 @@
   "clock": {
     "tooltip-format": "{calendar}",
     "format-alt": "  {:%a, %d %b %Y}",
-    "format": "{:%I:%M %p}",
+    "format": "{:%A, %I:%M %p}",
     "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select",
   },
   "network": {
